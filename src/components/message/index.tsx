@@ -1,4 +1,5 @@
 import {
+  MessageAvatar,
   MessageBox,
   MessageContainer,
   MessageContent,
@@ -9,7 +10,8 @@ import { MessageProps } from "./message.types";
 const Message = ({ username, message, origin = "sender" }: MessageProps) => {
   return (
     <MessageContainer origin={origin}>
-      {/* <MessageAvatar background={avatar} /> */}
+      {/* placeholder for now */}
+      <MessageAvatar />
 
       <MessageBox origin={origin}>
         <MessageUsername>{username}</MessageUsername>
