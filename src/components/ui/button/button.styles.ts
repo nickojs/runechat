@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import { css } from "styled-components";
 
-const Button = styled.button`
+const buttonBase = css`
   all: unset;
   position: relative;
 
@@ -12,4 +12,4 @@ const Button = styled.button`
   }
 `;
 
-export { Button };
+export { buttonBase };

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import sendImg from "../../assets/img/send.png";
-import { Button } from "../ui/button/button.styles";
+import { buttonBase } from "../ui/button/button.styles";
 
 const ChatInputContainer = styled.div`
   display: flex;
@@ -28,7 +28,8 @@ const InputOverride = styled.input`
   background-color: transparent;
 `;
 
-const SendBtn = styled(Button)`
+const SendBtn = styled.button`
+  ${buttonBase}
   margin-left: 8px;
   width: 30px;
   height: 30px;
