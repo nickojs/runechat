@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import sendImg from "../../assets/img/send.png";
+import { Button } from "../ui/button/button.styles";
 
 const ChatInputContainer = styled.div`
   display: flex;
@@ -27,16 +28,10 @@ const InputOverride = styled.input`
   background-color: transparent;
 `;
 
-const SendBtn = styled.button`
-  all: unset;
-  position: relative;
-
+const SendBtn = styled(Button)`
   margin-left: 8px;
   width: 30px;
   height: 30px;
-
-  cursor: pointer;
-  user-select: none;
 
   color: transparent;
 
@@ -49,7 +44,6 @@ const SendBtn = styled.button`
   }
 
   &:disabled {
-    cursor: not-allowed;
     pointer-events: none;
 
     &:before {
