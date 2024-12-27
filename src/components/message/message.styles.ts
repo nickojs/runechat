@@ -19,9 +19,6 @@ const MessageContainer = styled.div<{ origin: Origin }>`
   align-items: stretch;
   gap: 12px;
 
-  font-family: "Runescape";
-  font-weight: 400;
-
   margin-bottom: 8px;
 
   ${({ origin }) => (origin === "sender" ? senderPosition : receiverPosition)};
@@ -35,9 +32,9 @@ const MessageBox = styled.div<{ origin: Origin }>`
   align-content: flex-start;
   flex: 1;
 
-  background-color: #483e32;
-  border-radius: ${({ origin }) =>
-    origin === "sender" ? "8px 8px 8px 0" : "8px 8px 0 8px"};
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
+  border-radius: ${({ theme, origin }) =>
+    origin === "sender" ? theme.borderRadius.left : theme.borderRadius.right};
 `;
 
 const MessageUsername = styled.p`
@@ -46,7 +43,7 @@ const MessageUsername = styled.p`
   margin: 0;
   min-height: 16px;
 
-  color: #ffb21f;
+  color: ${({ theme }) => theme.colors.title};
   font-weight: 800;
 `;
 

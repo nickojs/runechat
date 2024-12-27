@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import borderImage from "../../assets/img/input-border.png";
 
 const ChatInputContainer = styled.div`
   display: flex;
@@ -9,8 +8,8 @@ const ChatInputContainer = styled.div`
 
   font-weight: 800;
 
-  border-image: url(${borderImage}) 30 / 30px / 1px;
-  background-color: #ccbb9a;
+  border-image: ${({ theme }) => theme.borderImage.default};
+  background-color: ${({ theme }) => theme.colors.bgLight};
 
   p {
     margin: 0;

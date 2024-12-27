@@ -5,13 +5,14 @@ const ChatViewContainer = styled.div`
   flex-direction: column;
   gap: 12px;
   padding: 8px;
-  background-color: black;
+  background-color: ${({ theme }) =>
+    theme.colors.textSecondary}; // this should be a texture
 
   max-width: 600px;
 `;
 
 const MessagesContainer = styled.div`
-  background-color: #3b332b;
+  background-color: ${({ theme }) => theme.colors.bgDarker};
 
   max-height: 400px;
 
