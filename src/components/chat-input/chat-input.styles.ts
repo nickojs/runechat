@@ -4,18 +4,25 @@ import borderImage from "../../assets/img/input-border.png";
 const ChatInputContainer = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #ccbb9a;
+
   padding: 16px;
-  width: 600px;
-  border-image: url(${borderImage}) 30 / 30px / 1px;
 
   font-weight: 800;
+
+  border-image: url(${borderImage}) 30 / 30px / 1px;
+  background-color: #ccbb9a;
+
+  p {
+    margin: 0;
+  }
 `;
 
 const InputOverride = styled.input`
   all: unset;
-  width: 100%;
+
+  flex: 1;
   margin-left: 8px;
+
   background-color: transparent;
 `;
 
