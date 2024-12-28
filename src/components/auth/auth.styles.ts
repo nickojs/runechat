@@ -24,7 +24,7 @@ const AuthContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
   width: 420px;
   padding: 12px;
@@ -71,4 +71,45 @@ export const ErrorMessage = styled.span`
   color: red;
 `;
 
-export { AuthContainer, RuneNavButton, RuneButton, Title, ButtonsContainer };
+// Form components
+const baseFormStyle = css`
+  color: ${({ theme }) => theme.colors.text};
+  font-weight: 800;
+`;
+
+const FormLabel = styled.label`
+  ${baseFormStyle}
+`;
+
+const FormInput = styled.input`
+  all: unset;
+  ${baseFormStyle}
+`;
+
+const FormInputContainer = styled.div`
+  margin: 8px 0;
+`;
+
+const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  min-height: 22px;
+
+  span {
+    color: red;
+  }
+`;
+
+export {
+  AuthContainer,
+  RuneNavButton,
+  RuneButton,
+  Title,
+  ButtonsContainer,
+  FormLabel,
+  FormInput,
+  FormInputContainer,
+  ErrorContainer,
+};

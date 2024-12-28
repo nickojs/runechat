@@ -2,10 +2,11 @@ import { useLocation } from "react-router";
 import {
   AuthContainer,
   ButtonsContainer,
-  RuneButton,
   RuneNavButton,
   Title,
 } from "./auth.styles";
+import CreateAccountForm from "./create-account";
+import LoginForm from "./login";
 
 const Auth = () => {
   let location = useLocation();
@@ -16,28 +17,16 @@ const Auth = () => {
   return (
     <AuthContainer>
       {isInitialPage && <Title>Welcome to RuneChat</Title>}
-      <ButtonsContainer>
-        {isInitialPage && (
+      {isSignupForm && <CreateAccountForm />}
+      {isLoginForm && <LoginForm />}
+      {isInitialPage && (
+        <ButtonsContainer>
           <>
             <RuneNavButton to={"/create-account"}>New User</RuneNavButton>
             <RuneNavButton to="/login">Existing User</RuneNavButton>
           </>
-        )}
-        {isLoginForm && (
-          <>
-            <RuneButton onClick={() => console.log("login")}>Login</RuneButton>
-            <RuneNavButton to="/">Cancel</RuneNavButton>
-          </>
-        )}
-        {isSignupForm && (
-          <>
-            <RuneButton onClick={() => console.log("login")}>
-              Create Account
-            </RuneButton>
-            <RuneNavButton to="/">Cancel</RuneNavButton>
-          </>
-        )}
-      </ButtonsContainer>
+        </ButtonsContainer>
+      )}
     </AuthContainer>
   );
 };

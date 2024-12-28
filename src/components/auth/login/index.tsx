@@ -9,15 +9,12 @@ import {
   RuneNavButton,
 } from "../auth.styles";
 
-const CreateAccountForm = () => {
+const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors, isValid },
   } = useForm();
-
-  const password = watch("password");
 
   const onSubmit = (data: any) => console.log(data);
 
@@ -25,16 +22,10 @@ const CreateAccountForm = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <ErrorContainer>
-          {errors.confirmPassword && (
-            <span role="alert">{errors.confirmPassword.message as string}</span>
-          )}
-          <br />
           {errors.password && (
             <>
               {errors.password && (
-                <span role="alert">
-                  password should have at least six (6) chars
-                </span>
+                <span role="alert">password is required</span>
               )}
             </>
           )}
@@ -45,7 +36,7 @@ const CreateAccountForm = () => {
           <FormLabel>username: </FormLabel>
           <FormInput
             type="text"
-            placeholder="create a username"
+            placeholder="username"
             {...register("username", {
               required: true,
               maxLength: 16,
@@ -66,21 +57,9 @@ const CreateAccountForm = () => {
           />
         </FormInputContainer>
 
-        <FormInputContainer>
-          <FormLabel>confirm password: </FormLabel>
-          <FormInput
-            type="password"
-            placeholder="confirm password"
-            {...register("confirmPassword", {
-              required: true,
-              validate: (value) =>
-                value === password || "Passwords do not match",
-            })}
-          />
-        </FormInputContainer>
         <ButtonsContainer>
           <RuneButton type="submit" disabled={!isValid}>
-            Create Account
+            Login
           </RuneButton>
           <RuneNavButton to="/">Cancel</RuneNavButton>
         </ButtonsContainer>
@@ -89,4 +68,4 @@ const CreateAccountForm = () => {
   );
 };
 
-export default CreateAccountForm;
+export default LoginForm;
