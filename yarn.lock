@@ -632,6 +632,25 @@
   dependencies:
     "@types/mdx" "^2.0.0"
 
+"@mjackson/form-data-parser@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@mjackson/form-data-parser/-/form-data-parser-0.4.0.tgz#429dcd41a71c9f9e4d6873ef0dfa097110187a34"
+  integrity sha512-zDQ0sFfXqn2bJaZ/ypXfGUe0lUjCzXybBHYEoyWaO2w1dZ0nOM9nRER8tVVv3a8ZIgO/zF6p2I5ieWJAUOzt3w==
+  dependencies:
+    "@mjackson/multipart-parser" "^0.6.1"
+
+"@mjackson/headers@^0.5.0":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@mjackson/headers/-/headers-0.5.1.tgz#2d01fdd8909737b88438825b25ce21a14bfed182"
+  integrity sha512-sJpFgecPT/zJvwk3GRNVWNs8EkwaJoUNU2D0VMlp+gDJs6cuSTm1q/aCZi3ZtuV6CgDEQ4l2ZjUG3A9JrQlbNA==
+
+"@mjackson/multipart-parser@^0.6.1":
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/@mjackson/multipart-parser/-/multipart-parser-0.6.3.tgz#17648f42c44147b45b53ef0c8d76d24fd444ae82"
+  integrity sha512-aQhySnM6OpAYMMG+m7LEygYye99hB1md/Cy1AFE0yD5hfNW+X4JDu7oNVY9Gc6IW8PZ45D1rjFLDIUdnkXmwrA==
+  dependencies:
+    "@mjackson/headers" "^0.5.0"
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -1003,7 +1022,7 @@
     "@vitest/expect" "2.0.5"
     "@vitest/spy" "2.0.5"
 
-"@storybook/theming@8.4.7":
+"@storybook/theming@8.4.7", "@storybook/theming@^8.0.0":
   version "8.4.7"
   resolved "https://registry.yarnpkg.com/@storybook/theming/-/theming-8.4.7.tgz#c308f6a883999bd35e87826738ab8a76515932b5"
   integrity sha512-99rgLEjf7iwfSEmdqlHkSG3AyLcK0sfExcr0jnc6rLiAkBhzuIsvcHjjUwkR210SOCgXqBPW0ZA6uhnuyppHLw==
@@ -1637,6 +1656,11 @@ commitizen@^4.0.3:
     minimist "1.2.7"
     strip-bom "4.0.0"
     strip-json-comments "3.1.1"
+
+compare-versions@^6.0.0:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/compare-versions/-/compare-versions-6.1.1.tgz#7af3cc1099ba37d244b3145a9af5201b629148a9"
+  integrity sha512-4hm4VPpIecmlg59CHXnRDnqGplJFrbLG4aFEl5vl6cK1u76ws3LLvX7ikFnTDl5vo39sjWD6AaDPYodJp/NNHg==
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -3044,6 +3068,11 @@ react-docgen@^7.0.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
 
+react-inspector@6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/react-inspector/-/react-inspector-6.0.2.tgz#aa3028803550cb6dbd7344816d5c80bf39d07e9d"
+  integrity sha512-x+b7LxhmHXjHoU/VrFAzw5iutsILRoYyDq97EDYdFpPLcvqtEzk4ZSZSQjnFPbr5T57tLXnHcqFYoN1pI6u8uQ==
+
 react-is@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
@@ -3271,6 +3300,16 @@ source-map@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
+
+storybook-addon-remix-react-router@3.0.3--canary.85.7d8672d.0:
+  version "3.0.3--canary.85.7d8672d.0"
+  resolved "https://registry.yarnpkg.com/storybook-addon-remix-react-router/-/storybook-addon-remix-react-router-3.0.3--canary.85.7d8672d.0.tgz#4f6d056488ef7313f13cc509cddb3f3d4e3af08b"
+  integrity sha512-0X8B9NDGlzXKJ0XJyzufrGERpaa2rd8RRJkQMb2Trcd/SePks6UiL0Who1xBRZ24FKWB6IgxKcXB0xdhVcJb3Q==
+  dependencies:
+    "@mjackson/form-data-parser" "^0.4.0"
+    "@storybook/theming" "^8.0.0"
+    compare-versions "^6.0.0"
+    react-inspector "6.0.2"
 
 storybook@^8.4.7:
   version "8.4.7"
