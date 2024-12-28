@@ -1,19 +1,42 @@
+import { useLocation } from "react-router";
 import {
   AuthContainer,
   ButtonsContainer,
-  RuneInput,
+  RuneButton,
+  RuneNavButton,
   Title,
 } from "./auth.styles";
 
-type FormType = "login" | "create";
-
 const Auth = () => {
+  let location = useLocation();
+  const isLoginForm = location.pathname.includes("login");
+  const isSignupForm = location.pathname.includes("create-account");
+  const isInitialPage = !isLoginForm && !isSignupForm;
+
   return (
     <AuthContainer>
-      <Title>Welcome to RuneChat</Title>
+      {isInitialPage && <Title>Welcome to RuneChat</Title>}
       <ButtonsContainer>
-        <RuneInput>New User</RuneInput>
-        <RuneInput>Existing User</RuneInput>
+        {isInitialPage && (
+          <>
+            <RuneNavButton to={"/create-account"}>New User</RuneNavButton>
+            <RuneNavButton to="/login">Existing User</RuneNavButton>
+          </>
+        )}
+        {isLoginForm && (
+          <>
+            <RuneButton onClick={() => console.log("login")}>Login</RuneButton>
+            <RuneNavButton to="/">Cancel</RuneNavButton>
+          </>
+        )}
+        {isSignupForm && (
+          <>
+            <RuneButton onClick={() => console.log("login")}>
+              Create Account
+            </RuneButton>
+            <RuneNavButton to="/">Cancel</RuneNavButton>
+          </>
+        )}
       </ButtonsContainer>
     </AuthContainer>
   );

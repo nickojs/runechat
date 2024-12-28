@@ -1,5 +1,24 @@
-import styled from "styled-components";
-import { Button } from "../ui/button/button.styles";
+import styled, { css } from "styled-components";
+import { buttonBase } from "../ui/button/button.styles";
+import { NavLink } from "react-router";
+
+const buttonStyles = css`
+  ${buttonBase}
+  padding: 8px 24px;
+
+  font-weight: 800;
+  font-size: 18px;
+
+  text-shadow: 1px 1px 1px ${({ theme }) => theme.colors.textSecondary};
+  border-image: ${({ theme }) => theme.borderImage.default};
+
+  color: ${({ theme }) => theme.colors.text};
+  background: ${({ theme }) => theme.colors.bgDarker};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.bgLight};
+  }
+`;
 
 const AuthContainer = styled.div`
   display: flex;
@@ -32,21 +51,12 @@ const ButtonsContainer = styled.div`
   margin: 24px 0;
 `;
 
-const RuneInput = styled(Button)`
-  padding: 8px 24px;
+const RuneNavButton = styled(NavLink)`
+  ${buttonStyles}
+`;
 
-  font-weight: 800;
-  font-size: 18px;
-
-  text-shadow: 1px 1px 1px ${({ theme }) => theme.colors.textSecondary};
-  border-image: ${({ theme }) => theme.borderImage.default};
-
-  color: ${({ theme }) => theme.colors.text};
-  background: ${({ theme }) => theme.colors.bgDarker};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.bgLight};
-  }
+const RuneButton = styled.button`
+  ${buttonStyles}
 `;
 
 export const ErrorMessage = styled.span`
@@ -61,4 +71,4 @@ export const ErrorMessage = styled.span`
   color: red;
 `;
 
-export { AuthContainer, RuneInput, Title, ButtonsContainer };
+export { AuthContainer, RuneNavButton, RuneButton, Title, ButtonsContainer };
