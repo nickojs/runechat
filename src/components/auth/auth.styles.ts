@@ -4,16 +4,19 @@ import { NavLink } from "react-router";
 
 const buttonStyles = css`
   ${buttonBase}
-  padding: 8px 24px;
+  padding: 8px 12px;
 
   font-weight: 800;
   font-size: 18px;
+  box-sizing: border-box;
+  max-height: 38px;
 
   text-shadow: 1px 1px 1px ${({ theme }) => theme.colors.textSecondary};
   border-image: ${({ theme }) => theme.borderImage.default};
 
   color: ${({ theme }) => theme.colors.text};
   background: ${({ theme }) => theme.colors.bgDarker};
+  text-align: center;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.bgLight};
@@ -47,8 +50,19 @@ const Title = styled.h1`
 
 const ButtonsContainer = styled.div`
   display: flex;
+  flex-direction: row;
   gap: 12px;
+
   margin: 24px 0;
+  padding: 0 24px;
+  width: 100%;
+
+  box-sizing: border-box;
+
+  button,
+  a {
+    flex: 1;
+  }
 `;
 
 const RuneNavButton = styled(NavLink)`
@@ -87,6 +101,7 @@ const FormInput = styled.input`
 `;
 
 const FormInputContainer = styled.div`
+  padding: 0 24px;
   margin: 8px 0;
 `;
 
