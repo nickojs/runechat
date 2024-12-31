@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import {
   ErrorContainer,
   FormInput,
@@ -8,15 +9,25 @@ import {
   RuneButton,
   RuneNavButton,
 } from "../auth.styles";
+import { loginRoutine } from "../../../store/auth/auth.saga";
+
+export interface LoginData {
+  username: string;
+  password: string;
+}
 
 const LoginForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm();
+  } = useForm<LoginData>();
 
-  const onSubmit = (data: any) => console.log(data);
+  const dispatch = useDispatch();
+
+  const onSubmit = (data: LoginData) => {
+    dispatch(loginRoutine.trigger(data));
+  };
 
   return (
     <>
