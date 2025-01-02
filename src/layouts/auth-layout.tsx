@@ -1,10 +1,10 @@
-import Auth from "../components/auth";
-import { AuthLayoutBase } from "./auth-layout.styles";
+import { Outlet } from "react-router";
+import { AuthLayoutBase } from "./base.styles";
 
 const AuthLayout = () => {
   return (
     <AuthLayoutBase>
-      <Auth />
+      <Outlet />
     </AuthLayoutBase>
   );
 };
