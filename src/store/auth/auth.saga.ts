@@ -6,11 +6,11 @@ import {
   PutEffect,
   takeEvery,
 } from "redux-saga/effects";
+import { AnyAction } from "redux-saga";
 import { createRoutine } from "redux-saga-routines";
 
 import { login } from "../../api/endpoints";
 import { LoginData } from "../../components/auth/login";
-import { AnyAction } from "redux-saga";
 import { AuthLoginResponse } from "../../api/api";
 
 // routines
@@ -22,10 +22,12 @@ function* loginSaga(
 ): Generator<
   CallEffect<AuthLoginResponse> | PutEffect<AnyAction>,
   void,
-  LoginData
+  AuthLoginResponse
 > {
   try {
-    const data = yield call(login, action.payload);
+    const data: AuthLoginResponse = yield call(login, action.payload);
+    const token = data.user.authToken;
+    sessionStorage.setItem("authToken", token);
     yield put(loginRoutine.success(data));
   } catch (err) {
     yield put(loginRoutine.failure(err));
