@@ -10,3 +10,8 @@ export const usernameSelector = createSelector(authStore, (store) => {
 export const tokenSelector = createSelector(authStore, (store) => {
   return store.authToken;
 });
+
+export const isAuthLoadingSelector = createSelector(
+  authStore,
+  (store) => store.isLoading
+);

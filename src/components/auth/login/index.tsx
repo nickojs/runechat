@@ -1,5 +1,6 @@
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import {
   ErrorContainer,
   FormInput,
@@ -7,9 +8,9 @@ import {
   FormLabel,
   ButtonsContainer,
   RuneButton,
-  RuneNavButton,
 } from "../auth.styles";
 import { loginRoutine } from "../../../store/auth/auth.saga";
+import { isAuthLoadingSelector } from "../../../store/auth/auth.selectors";
 
 export interface LoginData {
   username: string;
@@ -24,6 +25,9 @@ const LoginForm = () => {
   } = useForm<LoginData>();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const isLoading = useSelector(isAuthLoadingSelector);
 
   const onSubmit = (data: LoginData) => {
     dispatch(loginRoutine.trigger(data));
@@ -69,10 +73,12 @@ const LoginForm = () => {
         </FormInputContainer>
 
         <ButtonsContainer>
-          <RuneButton type="submit" disabled={!isValid}>
+          <RuneButton type="submit" disabled={!isValid || isLoading}>
             Login
           </RuneButton>
-          <RuneNavButton to="/">Cancel</RuneNavButton>
+          <RuneButton disabled={isLoading} onClick={() => navigate("/")}>
+            Cancel
+          </RuneButton>
         </ButtonsContainer>
       </form>
     </>
