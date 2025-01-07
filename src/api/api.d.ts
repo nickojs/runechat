@@ -3,5 +3,6 @@ export interface AuthLoginResponse {
   user: {
     id: string;
     authToken: string;
+    username: string;
   };
 }

@@ -12,6 +12,7 @@ import { createRoutine } from "redux-saga-routines";
 import { login } from "../../api/endpoints";
 import { LoginData } from "../../components/auth/login";
 import { AuthLoginResponse } from "../../api/api";
+import storageHelper from "../../helpers/storage";
 
 // routines
 export const loginRoutine = createRoutine("AUTH/LOGIN");
@@ -27,7 +28,7 @@ function* loginSaga(
   try {
     const data: AuthLoginResponse = yield call(login, action.payload);
     const token = data.user.authToken;
-    sessionStorage.setItem("authToken", token);
+    storageHelper.auth.set(token);
     yield put(loginRoutine.success(data));
   } catch (err) {
     yield put(loginRoutine.failure(err));

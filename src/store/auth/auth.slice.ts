@@ -5,6 +5,7 @@ import { AuthLoginResponse } from "../../api/api";
 const initialState = {
   userId: "",
   authToken: "",
+  username: "",
   isLoading: false,
 };
 
@@ -27,6 +28,7 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.authToken = payload.user.authToken;
         state.userId = payload.user.id;
+        state.username = payload.user.username;
       }
     );
   },
