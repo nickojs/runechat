@@ -76,7 +76,11 @@ const LoginForm = () => {
           <RuneButton type="submit" disabled={!isValid || isLoading}>
             Login
           </RuneButton>
-          <RuneButton disabled={isLoading} onClick={() => navigate("/")}>
+          <RuneButton
+            disabled={isLoading}
+            type="button"
+            onClick={() => navigate("/")}
+          >
             Cancel
           </RuneButton>
         </ButtonsContainer>

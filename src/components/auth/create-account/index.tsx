@@ -90,7 +90,11 @@ const CreateAccountForm = () => {
           <RuneButton type="submit" disabled={!isValid}>
             Create Account
           </RuneButton>
-          <RuneButton disabled={isLoading} onClick={() => navigate("/")}>
+          <RuneButton
+            disabled={isLoading}
+            type="button"
+            onClick={() => navigate("/")}
+          >
             Cancel
           </RuneButton>
         </ButtonsContainer>
