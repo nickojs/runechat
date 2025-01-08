@@ -9,18 +9,31 @@ const axiosInstance = axios.create({
 });
 
 // uncomment when implemented
-// axiosInstance.interceptors.request.use(
-//   (config) => {
-//     const token = localStorage.getItem('authToken');
-//     if (token) {
-//       config.headers['Authorization'] = `Bearer ${token}`;
-//     }
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
 
-//     return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (config) => {
+    return config;
+  },
+  (error) => {
+    if (import.meta.env.DEV) {
+      console.log("[Axios response full error]");
+      console.log(error);
+    }
+    return Promise.reject(error.response.data);
+  }
+);
 
 export default axiosInstance;
