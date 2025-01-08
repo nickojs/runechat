@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
+import { ToastContainer } from "react-toastify";
 
 import Auth from "./components/auth/index.tsx";
 import AuthLayout from "./layouts/auth-layout.tsx";
@@ -17,6 +18,7 @@ import ChatView from "./components/chat-view/index.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
+      <ToastContainer hideProgressBar position="top-center" autoClose={5000} />
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Routes>

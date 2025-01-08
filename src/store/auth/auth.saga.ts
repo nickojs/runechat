@@ -8,10 +8,15 @@ import {
 } from "redux-saga/effects";
 import { AnyAction } from "redux-saga";
 import { createRoutine } from "redux-saga-routines";
+import { toast } from "react-toastify";
 
 import { createAcc, login } from "../../api/endpoints";
 import { LoginData } from "../../components/auth/login";
-import { AuthLoginResponse, CreateAccResponse } from "../../api/api";
+import {
+  AuthLoginResponse,
+  CreateAccResponse,
+  DefaultErrorResponse,
+} from "../../api/api";
 import storageHelper from "../../helpers/storage";
 
 // routines
@@ -43,11 +48,14 @@ function* createAccSaga(
   void,
   CreateAccResponse
 > {
+  const notifyError = (value: string) => toast.error(value);
+  const notifySuccess = (value: string) => toast.success(value);
   try {
     const data: CreateAccResponse = yield call(createAcc, action.payload);
+    notifySuccess(data.message);
     yield put(createAccRoutine.success(data));
   } catch (err) {
-    console.log(err);
+    notifyError((err as DefaultErrorResponse).message);
     yield put(createAccRoutine.failure(err));
   }
 }

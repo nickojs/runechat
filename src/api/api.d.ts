@@ -9,3 +9,8 @@ export interface AuthLoginResponse {
 export interface CreateAccResponse {
   message: string;
 }
+
+export interface DefaultErrorResponse {
+  message: string;
+  statusCode: number;
+}
