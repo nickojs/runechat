@@ -7,7 +7,7 @@ enum MessageType {
   ERROR = "error",
 }
 
-const initialState = {
+export const initialState = {
   userId: "",
   authToken: "",
   username: "",
@@ -15,6 +15,8 @@ const initialState = {
   message: "",
   messageType: "",
 };
+
+export type AuthState = typeof initialState;
 
 export const authSlice = createSlice({
   name: "auth",

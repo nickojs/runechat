@@ -8,7 +8,7 @@ const middleware = [sagaMiddleware];
 
 const sagas = [watchAuthSagaRequests];
 
-const reducers = combineReducers({
+export const reducers = combineReducers({
   authReducer,
 });
 

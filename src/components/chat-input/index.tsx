@@ -4,16 +4,19 @@ import {
   InputOverride,
   SendBtn,
 } from "./chat-input.styles";
+import { useSelector } from "react-redux";
+import { usernameSelector } from "../../store/auth/auth.selectors";
 
 const ChatInput = () => {
   const [input, setInput] = useState<string>("");
+  const username = useSelector(usernameSelector);
 
   const inputHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
     setInput(e.target.value);
 
   return (
     <ChatInputContainer>
-      <p>username:</p>
+      <p>{username}:</p>
       <InputOverride onChange={inputHandler} />
       <SendBtn disabled={!input}>Send</SendBtn>
     </ChatInputContainer>
