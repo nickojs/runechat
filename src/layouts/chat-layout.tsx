@@ -1,5 +1,6 @@
-import { ChatLayoutBase } from "./base.styles";
 import { Outlet } from "react-router";
+import { ChatLayoutBase } from "./base.styles";
+import withAuth from "../hoc/withAuth";
 
 const ChatLayout = () => {
   return (
@@ -9,4 +10,4 @@ const ChatLayout = () => {
   );
 };
 
-export default ChatLayout;
+export default withAuth(ChatLayout);
