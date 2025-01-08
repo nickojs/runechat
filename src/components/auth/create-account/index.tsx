@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import {
   ErrorContainer,
   FormInput,
@@ -6,8 +8,9 @@ import {
   FormLabel,
   ButtonsContainer,
   RuneButton,
-  RuneNavButton,
 } from "../auth.styles";
+import { isAuthLoadingSelector } from "../../../store/auth/auth.selectors";
+import { createAccRoutine } from "../../../store/auth/auth.saga";
 
 const CreateAccountForm = () => {
   const {
@@ -16,10 +19,15 @@ const CreateAccountForm = () => {
     watch,
     formState: { errors, isValid },
   } = useForm();
+  const isLoading = useSelector(isAuthLoadingSelector);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const password = watch("password");
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit = (data: any) => {
+    dispatch(createAccRoutine.trigger(data));
+  };
 
   return (
     <>
@@ -82,7 +90,9 @@ const CreateAccountForm = () => {
           <RuneButton type="submit" disabled={!isValid}>
             Create Account
           </RuneButton>
-          <RuneNavButton to="/">Cancel</RuneNavButton>
+          <RuneButton disabled={isLoading} onClick={() => navigate("/")}>
+            Cancel
+          </RuneButton>
         </ButtonsContainer>
       </form>
     </>

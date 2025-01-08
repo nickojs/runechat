@@ -6,3 +6,6 @@ export interface AuthLoginResponse {
     username: string;
   };
 }
+export interface CreateAccResponse {
+  message: string;
+}
