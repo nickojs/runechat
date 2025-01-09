@@ -20,6 +20,21 @@ const AuthLayoutBase = styled.section`
 
 const ChatLayoutBase = styled.section`
   ${baseLayout}
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    ". . . ."
+    ". . . ."
+    "chat chat . ."
+    "chat chat . .";
 `;
 
-export { AuthLayoutBase, ChatLayoutBase };
+const ChatContainer = styled.div`
+  grid-area: chat;
+  height: 100%;
+`;
+
+export { AuthLayoutBase, ChatLayoutBase, ChatContainer };

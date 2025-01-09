@@ -4,19 +4,21 @@ const ChatViewContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+
   padding: 8px;
+  height: 100%;
+
+  box-sizing: border-box;
+
   background-color: ${({ theme }) =>
     theme.colors.textSecondary}; // this should be a texture
-
-  max-width: 600px;
 `;
 
 const MessagesContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.bgDarker};
 
-  max-height: 400px;
-
   overflow-y: scroll;
+  flex: 1;
 
   padding: 8px;
 `;
