@@ -1,5 +1,5 @@
 import mockMessages from "../../assets/message-mocks";
-import withAuth from "../../hoc/withAuth";
+import { withAuth } from "../../hoc/withAuth";
 import ChatInput from "../chat-input";
 import Message from "../message";
 import { Origin } from "../message/message.types";

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import storageHelper from "../helpers/storage";
 import { tokenSelector } from "../store/auth/auth.selectors";
 
-const withAuth = (WrappedComponent: React.ComponentType) => {
+export const withAuth = (WrappedComponent: React.ComponentType) => {
   return (props) => {
     const navigate = useNavigate();
     const authToken = useSelector(tokenSelector);
@@ -18,5 +18,3 @@ const withAuth = (WrappedComponent: React.ComponentType) => {
     return <WrappedComponent {...props} />;
   };
 };
-
-export default withAuth;
