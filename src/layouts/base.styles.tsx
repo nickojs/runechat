@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import authBg from "../assets/img/auth-wall.png";
+import osrsBg from "../assets/img/osrs-bg.jpg";
 
 const baseLayout = css`
   display: flex;
@@ -10,16 +11,21 @@ const baseLayout = css`
   width: 100vw;
 `;
 
-const AuthLayoutBase = styled.section`
-  ${baseLayout}
-  background-image: url(${authBg});
+const generateBg = (imageSrc: string) => css`
+  background-image: url(${imageSrc});
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
 `;
 
+const AuthLayoutBase = styled.section`
+  ${baseLayout}
+  ${generateBg(authBg)}
+`;
+
 const ChatLayoutBase = styled.section`
   ${baseLayout}
+  ${generateBg(osrsBg)}
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
