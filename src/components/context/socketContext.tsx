@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { io } from "socket.io-client";
+import { io, Socket } from "socket.io-client";
 import {
   tokenSelector,
   usernameSelector,
@@ -19,8 +19,6 @@ export interface SocketProps {
 
 const SocketContext = React.createContext<SocketProps>({} as SocketProps);
 
-const socket = io(URL, { reconnection: true, autoConnect: false });
-
 export const SocketProvider = ({
   children,
 }: {
@@ -32,14 +30,22 @@ export const SocketProvider = ({
   const username = useSelector(usernameSelector);
   const dispatch = useDispatch();
 
+  const socket = useMemo(
+    (): Socket =>
+      io(URL, {
+        reconnection: true,
+        autoConnect: false,
+        query: {
+          username: username,
+          auth: token,
+        },
+      }),
+    [username, token]
+  );
+
   const onConnect = () => {
     setConnected(true);
     setSocketId(socket.id as string);
-    socket.emit("post-connection-data", {
-      username,
-      auth: token,
-      socketId: socket.id,
-    });
   };
 
   const onAdmMessage = (data: MessageObject) => {
