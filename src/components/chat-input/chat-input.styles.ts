@@ -26,6 +26,10 @@ const InputOverride = styled.input`
   margin-left: 8px;
 
   background-color: transparent;
+
+  &:disabled {
+    background-color: ${({ theme }) => theme.colors.bgDarker};
+  }
 `;
 
 const SendBtn = styled.button`

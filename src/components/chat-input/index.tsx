@@ -7,12 +7,14 @@ import {
 } from "./chat-input.styles";
 import { usernameSelector } from "../../store/auth/auth.selectors";
 import useKeyDown from "../../hooks/useKeydown";
+import socketContext from "../context/socketContext";
 
 interface ChatInputProps {
   onSend: (message: string) => void;
 }
 
 export const ChatInput = ({ onSend }: ChatInputProps) => {
+  const { isConnected } = socketContext();
   const [input, setInput] = useState<string>("");
   const username = useSelector(usernameSelector);
   const isEnterPressed = useKeyDown("Enter");
@@ -34,8 +36,12 @@ export const ChatInput = ({ onSend }: ChatInputProps) => {
   return (
     <ChatInputContainer>
       <p>{username}:</p>
-      <InputOverride onChange={inputHandler} value={input} />
-      <SendBtn disabled={!input} onClick={sendMessageHandler}>
+      <InputOverride
+        onChange={inputHandler}
+        value={input}
+        disabled={!isConnected}
+      />
+      <SendBtn disabled={!input || !isConnected} onClick={sendMessageHandler}>
         Send
       </SendBtn>
     </ChatInputContainer>
