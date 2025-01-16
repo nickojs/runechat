@@ -8,13 +8,15 @@ import {
 import { MessageProps } from "./message.types";
 
 const Message = ({ username, message, origin = "sender" }: MessageProps) => {
+  const isSystemMessage = origin === "system";
+
   return (
     <MessageContainer origin={origin}>
       {/* placeholder for now */}
-      <MessageAvatar />
+      {!isSystemMessage && <MessageAvatar />}
 
       <MessageBox origin={origin}>
-        <MessageUsername>{username}</MessageUsername>
+        {!isSystemMessage && <MessageUsername>{username}</MessageUsername>}
         <MessageContent>{message}</MessageContent>
       </MessageBox>
     </MessageContainer>

@@ -8,6 +8,11 @@ export const theme = {
     textSecondary: "#000000",
     title: "#ffb21f",
   },
+  systemColors: {
+    default: "#ffffff",
+    alert: "#ff0000",
+    warning: "#fff000",
+  },
   borderRadius: {
     left: "8px 8px 8px 0",
     right: "8px 8px 0 8px",

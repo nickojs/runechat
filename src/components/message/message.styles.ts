@@ -13,6 +13,51 @@ const receiverPosition = css`
     text-align: right;
   }
 `;
+const systemPosition = css`
+  flex-direction: row;
+  p {
+    text-align: center;
+  }
+`;
+
+const regularMsg = css<{ origin: Origin }>`
+  background-color: ${({ theme }) => theme.colors.bgPrimary};
+
+  border-radius: ${({ origin, theme }) =>
+    origin === "sender" ? theme.borderRadius.left : theme.borderRadius.right};
+`;
+
+const adminMsg = css`
+  position: relative;
+
+  padding: 8px 0px;
+  border: 4px double black;
+  box-shadow: 0 0 3px black inset;
+
+  background-color: transparent;
+  border-radius: 0;
+
+  p {
+    color: ${(props) => props.theme.systemColors.default};
+    text-shadow: 1px 1px 10px black;
+    font-weight: "bold";
+    margin: 0;
+    padding: 0;
+  }
+`;
+
+const resolveOrigin = (origin: Origin) => {
+  switch (origin) {
+    case "receiver":
+      return receiverPosition;
+    case "sender":
+      return senderPosition;
+    case "system":
+      return systemPosition;
+    default:
+      break;
+  }
+};
 
 const MessageContainer = styled.div<{ origin: Origin }>`
   display: flex;
@@ -21,7 +66,7 @@ const MessageContainer = styled.div<{ origin: Origin }>`
 
   margin-bottom: 8px;
 
-  ${({ origin }) => (origin === "sender" ? senderPosition : receiverPosition)};
+  ${({ origin }) => resolveOrigin(origin)};
 `;
 
 const MessageBox = styled.div<{ origin: Origin }>`
@@ -32,9 +77,7 @@ const MessageBox = styled.div<{ origin: Origin }>`
   align-content: flex-start;
   flex: 1;
 
-  background-color: ${({ theme }) => theme.colors.bgPrimary};
-  border-radius: ${({ theme, origin }) =>
-    origin === "sender" ? theme.borderRadius.left : theme.borderRadius.right};
+  ${({ origin }) => (origin === "system" ? adminMsg : regularMsg)}
 `;
 
 const MessageUsername = styled.p`

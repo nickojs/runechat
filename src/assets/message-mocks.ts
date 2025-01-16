@@ -2,9 +2,9 @@ import { MessageObject } from "../types/socket";
 
 export const mockedMessages = [
   {
-    username: "carol",
-    message: "Are you free to talk later?",
-    messageOrigin: "sender",
+    username: "system",
+    message: "username has just entered the chat!",
+    messageOrigin: "system",
     timeStamp: 1736991301484,
     socketId: "socket_1",
   },
