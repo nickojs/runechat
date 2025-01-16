@@ -22,6 +22,7 @@ const ChatView = () => {
       <MessagesContainer>
         {allMessages?.map((msg) => (
           <Message
+            key={msg.message}
             username={msg.username}
             message={msg.message}
             origin={msg.messageOrigin as Origin}
