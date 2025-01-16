@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { withAuth } from "../../hoc/withAuth";
@@ -15,7 +16,7 @@ import { messageObjBuilder } from "../../types/socket";
 import { addMessage } from "../../store/messages/messages.slice";
 
 const ChatView = () => {
-  const { socketId, emitMessage } = socketContext();
+  const { socketId, emitMessage, getAllSockets } = socketContext();
   const allMessages = useSelector(allMessagesSelector);
   const username = useSelector(usernameSelector);
   const dispatch = useDispatch();
@@ -33,6 +34,10 @@ const ChatView = () => {
   };
 
   console.log(allMessages);
+
+  useEffect(() => {
+    getAllSockets();
+  }, []);
 
   return (
     <ChatViewContainer>

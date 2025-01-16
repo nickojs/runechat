@@ -15,6 +15,7 @@ export interface SocketProps {
   isConnected: boolean;
   socketId: string;
   emitMessage: (data: any) => void;
+  getAllSockets: () => void;
 }
 
 const SocketContext = React.createContext<SocketProps>({} as SocketProps);
@@ -63,6 +64,10 @@ export const SocketProvider = ({
     dispatch(addMessage(message));
   };
 
+  const onConnectedSockets = (data: any) => {
+    console.log(data);
+  };
+
   const onError = (error: any) => {
     console.log(
       "[SocketProvider] something went wrong : ",
@@ -86,6 +91,8 @@ export const SocketProvider = ({
 
       socket.on("adm_message", onAdmMessage);
       socket.on("message", onReceiveMessage);
+
+      socket.on("connected-sockets", onConnectedSockets);
     }
 
     return () => {
@@ -94,6 +101,7 @@ export const SocketProvider = ({
       socket.off("error", onError);
       socket.off("disconnect", onDisconnection);
       socket.off("message", onReceiveMessage);
+      socket.off("connected-sockets", onConnectedSockets);
     };
   }, [socket, token]);
 
@@ -108,12 +116,17 @@ export const SocketProvider = ({
     socket.emit("message", data);
   };
 
+  const getAllSockets = () => {
+    socket.emit("request-connected-sockets");
+  };
+
   return (
     <SocketContext.Provider
       value={{
         isConnected,
         socketId,
         emitMessage,
+        getAllSockets,
       }}
     >
       {children}
