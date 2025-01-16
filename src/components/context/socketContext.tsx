@@ -21,11 +21,15 @@ const SocketContext = React.createContext<SocketProps>({} as SocketProps);
 
 export const SocketProvider = ({
   children,
+  values,
 }: {
   children: React.ReactElement;
+  values?: Partial<SocketProps>;
 }) => {
-  const [isConnected, setConnected] = useState(false);
-  const [socketId, setSocketId] = useState<string>("");
+  const [isConnected, setConnected] = useState(
+    values?.isConnected !== undefined ? values?.isConnected : false
+  );
+  const [socketId, setSocketId] = useState<string>(values?.socketId || "");
   const token = useSelector(tokenSelector);
   const username = useSelector(usernameSelector);
   const dispatch = useDispatch();

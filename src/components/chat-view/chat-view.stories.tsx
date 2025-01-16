@@ -6,6 +6,7 @@ import { MemoryRouter } from "react-router";
 import { reducers } from "../../store";
 import { mockedMessages } from "../../assets/message-mocks";
 import ChatView from ".";
+import { initialState } from "../../store/auth/auth.slice";
 
 export const mockedMessagesStore = () =>
   configureStore({
@@ -13,6 +14,10 @@ export const mockedMessagesStore = () =>
     preloadedState: {
       messagesReducer: {
         messages: mockedMessages,
+      },
+      authReducer: {
+        ...initialState,
+        username: "zezima",
       },
     },
   });
@@ -34,6 +39,7 @@ const meta: Meta<typeof ChatView> = {
   parameters: {
     layout: "centered",
   },
+  excludeStories: ["mockedMessagesStore"],
 };
 
 export default meta;
