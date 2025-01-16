@@ -31,16 +31,15 @@ const adminMsg = css`
   position: relative;
 
   padding: 8px 0px;
-  border: 4px double black;
-  box-shadow: 0 0 3px black inset;
-
+  border-image: ${({ theme }) => theme.borderImage.default};
+  box-shadow: -1px 1px 5px black;
   background-color: transparent;
   border-radius: 0;
 
   p {
     color: ${(props) => props.theme.systemColors.default};
-    text-shadow: 1px 1px 10px black;
-    font-weight: "bold";
+    text-shadow: -1px 1px 4px black;
+    font-weight: 800;
     margin: 0;
     padding: 0;
   }
