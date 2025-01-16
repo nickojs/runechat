@@ -7,7 +7,11 @@ import {
 } from "./message.styles";
 import { MessageProps } from "./message.types";
 
-const Message = ({ username, message, origin = "sender" }: MessageProps) => {
+export const Message = ({
+  username,
+  message,
+  origin = "sender",
+}: MessageProps) => {
   const isSystemMessage = origin === "system";
 
   return (
@@ -22,5 +26,3 @@ const Message = ({ username, message, origin = "sender" }: MessageProps) => {
     </MessageContainer>
   );
 };
-
-export default Message;

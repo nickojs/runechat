@@ -1,21 +1,38 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { withAuth } from "../../hoc/withAuth";
 
-import Message from "../message";
-import ChatInput from "../chat-input";
+import { Message } from "../message";
+import { ChatInput } from "../chat-input";
 import { ChatViewContainer, MessagesContainer } from "./chat-view.styles";
 
-import { Origin } from "../message/message.types";
+import socketContext from "../context/socketContext";
 import { allMessagesSelector } from "../../store/messages/messages.selectors";
+import { usernameSelector } from "../../store/auth/auth.selectors";
+
+import { Origin } from "../message/message.types";
+import { messageObjBuilder } from "../../types/socket";
+import { addMessage } from "../../store/messages/messages.slice";
 
 const ChatView = () => {
+  const { socketId, emitMessage } = socketContext();
   const allMessages = useSelector(allMessagesSelector);
+  const username = useSelector(usernameSelector);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(allMessages);
-  }, [allMessages]);
+  const sendMessage = (data: string) => {
+    if (!data) return;
+    const msgObj = messageObjBuilder(data, socketId, username);
+    emitMessage(msgObj);
+    dispatch(
+      addMessage({
+        ...msgObj,
+        messageOrigin: "sender",
+      })
+    );
+  };
+
+  console.log(allMessages);
 
   return (
     <ChatViewContainer>
@@ -29,7 +46,7 @@ const ChatView = () => {
           />
         ))}
       </MessagesContainer>
-      <ChatInput />
+      <ChatInput onSend={sendMessage} />
     </ChatViewContainer>
   );
 };

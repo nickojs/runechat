@@ -5,7 +5,7 @@ import {
   tokenSelector,
   usernameSelector,
 } from "../../store/auth/auth.selectors";
-import { MessageObject } from "../../types/socket";
+import { MessageObject, MessagePayload } from "../../types/socket";
 import { addMessage, clearMessages } from "../../store/messages/messages.slice";
 
 const URL =
@@ -13,6 +13,7 @@ const URL =
 
 export interface SocketProps {
   isConnected: boolean;
+  socketId: string;
   emitMessage: (data: any) => void;
 }
 
@@ -26,21 +27,30 @@ export const SocketProvider = ({
   children: React.ReactElement;
 }) => {
   const [isConnected, setConnected] = useState(false);
+  const [socketId, setSocketId] = useState<string>("");
   const token = useSelector(tokenSelector);
   const username = useSelector(usernameSelector);
   const dispatch = useDispatch();
 
   const onConnect = () => {
     setConnected(true);
+    setSocketId(socket.id as string);
     socket.emit("post-connection-data", {
-      auth: token,
       username,
+      auth: token,
+      socketId: socket.id,
     });
   };
 
   const onAdmMessage = (data: MessageObject) => {
     console.log(data);
     dispatch(addMessage(data));
+  };
+
+  const onReceiveMessage = ({ data }: { data: MessageObject[] }) => {
+    const message = data[0];
+    if (!message) return;
+    dispatch(addMessage(message));
   };
 
   const onError = (error: any) => {
@@ -65,6 +75,7 @@ export const SocketProvider = ({
       socket.on("disconnect", onDisconnection);
 
       socket.on("adm_message", onAdmMessage);
+      socket.on("message", onReceiveMessage);
     }
 
     return () => {
@@ -72,14 +83,18 @@ export const SocketProvider = ({
       socket.off("adm_message", onAdmMessage);
       socket.off("error", onError);
       socket.off("disconnect", onDisconnection);
+      socket.off("message", onReceiveMessage);
     };
   }, [socket, token]);
 
   useEffect(() => {
     console.log(socket.disconnected);
+    if (socket.id) {
+      setSocketId(socket.id);
+    }
   }, [socket]);
 
-  const emitMessage = (data: any) => {
+  const emitMessage = (data: MessagePayload) => {
     socket.emit("message", data);
   };
 
@@ -87,6 +102,7 @@ export const SocketProvider = ({
     <SocketContext.Provider
       value={{
         isConnected,
+        socketId,
         emitMessage,
       }}
     >

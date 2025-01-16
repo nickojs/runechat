@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import Message from ".";
+import { Message } from ".";
 
 const longMessage =
   "Lorem ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim ipsum dolor atchim";
