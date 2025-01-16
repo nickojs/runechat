@@ -1,4 +1,4 @@
-export type Origin = "sender" | "receiver";
+export type Origin = "sender" | "receiver" | "system";
 
 export interface MessageProps {
   username: string;

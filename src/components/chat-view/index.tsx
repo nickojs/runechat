@@ -1,19 +1,30 @@
-import mockMessages from "../../assets/message-mocks";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
 import { withAuth } from "../../hoc/withAuth";
-import ChatInput from "../chat-input";
+
 import Message from "../message";
-import { Origin } from "../message/message.types";
+import ChatInput from "../chat-input";
 import { ChatViewContainer, MessagesContainer } from "./chat-view.styles";
 
+import { Origin } from "../message/message.types";
+import { allMessagesSelector } from "../../store/messages/messages.selectors";
+
 const ChatView = () => {
+  const allMessages = useSelector(allMessagesSelector);
+
+  useEffect(() => {
+    console.log(allMessages);
+  }, [allMessages]);
+
   return (
     <ChatViewContainer>
       <MessagesContainer>
-        {mockMessages.map((msg) => (
+        {allMessages?.map((msg) => (
           <Message
-            username={msg.username}
+            username={msg.sockedId}
             message={msg.message}
-            origin={msg.origin as Origin}
+            origin={msg.messageOrigin as Origin}
           />
         ))}
       </MessagesContainer>

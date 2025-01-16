@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import {
   tokenSelector,
   usernameSelector,
 } from "../../store/auth/auth.selectors";
-import { AdmWelcomeMessageData } from "../../types/socket";
+import { MessageObject } from "../../types/socket";
+import { addMessage, clearMessages } from "../../store/messages/messages.slice";
 
 const URL =
   process.env.NODE_ENV === "production" ? undefined : "http://localhost:3003";
@@ -17,7 +18,7 @@ export interface SocketProps {
 
 const SocketContext = React.createContext<SocketProps>({} as SocketProps);
 
-const socket = io(URL, { reconnection: false, autoConnect: false });
+const socket = io(URL, { reconnection: true, autoConnect: false });
 
 export const SocketProvider = ({
   children,
@@ -27,6 +28,7 @@ export const SocketProvider = ({
   const [isConnected, setConnected] = useState(false);
   const token = useSelector(tokenSelector);
   const username = useSelector(usernameSelector);
+  const dispatch = useDispatch();
 
   const onConnect = () => {
     setConnected(true);
@@ -36,8 +38,22 @@ export const SocketProvider = ({
     });
   };
 
-  const onAdmMessage = (data: AdmWelcomeMessageData) => {
+  const onAdmMessage = (data: MessageObject) => {
     console.log(data);
+    dispatch(addMessage(data));
+  };
+
+  const onError = (error: any) => {
+    console.log(
+      "[SocketProvider] something went wrong : ",
+      JSON.stringify(error)
+    );
+  };
+
+  const onDisconnection = () => {
+    setConnected(false);
+    dispatch(clearMessages());
+    console.log("user disconnected");
   };
 
   useEffect(() => {
@@ -45,12 +61,8 @@ export const SocketProvider = ({
       socket.connect();
 
       socket.on("connect", onConnect);
-      socket.on("error", (err) => {
-        console.log(
-          "[SocketProvider] something went wrong : ",
-          JSON.stringify(err)
-        );
-      });
+      socket.on("error", onError);
+      socket.on("disconnect", onDisconnection);
 
       socket.on("adm_message", onAdmMessage);
     }
@@ -58,8 +70,14 @@ export const SocketProvider = ({
     return () => {
       socket.off("connect", onConnect);
       socket.off("adm_message", onAdmMessage);
+      socket.off("error", onError);
+      socket.off("disconnect", onDisconnection);
     };
   }, [socket, token]);
+
+  useEffect(() => {
+    console.log(socket.disconnected);
+  }, [socket]);
 
   const emitMessage = (data: any) => {
     socket.emit("message", data);
