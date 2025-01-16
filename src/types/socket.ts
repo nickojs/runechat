@@ -2,12 +2,14 @@ export interface MessageObject {
   messageOrigin: string;
   message: string;
   timeStamp: Date;
-  sockedId: string;
+  socketId: string;
+  username: string;
 }
 
 export const emptyMessageObject = {
+  username: "",
   messageOrigin: "",
   message: "",
   timeStamp: new Date(),
-  sockedId: "",
+  socketId: "",
 };

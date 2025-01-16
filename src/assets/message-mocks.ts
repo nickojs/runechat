@@ -1,44 +1,74 @@
-export default [
+import { MessageObject } from "../types/socket";
+
+export const mockedMessages = [
   {
     username: "carol",
     message: "Are you free to talk later?",
-    origin: "sender",
+    messageOrigin: "sender",
+    timeStamp: 1736991301484,
+    socketId: "socket_1",
   },
   {
     username: "bob",
     message: "Thanks for the quick response!",
-    origin: "receiver",
+    messageOrigin: "receiver",
+    timeStamp: 1736991301484,
+    socketId: "socket_2",
   },
   {
     username: "alice",
     message: "What time works for you tomorrow?",
-    origin: "receiver",
+    messageOrigin: "receiver",
+    timeStamp: 1736991301484,
+    socketId: "socket_3",
   },
   {
     username: "ian",
     message: "I finished the project, take a look!",
-    origin: "receiver",
+    messageOrigin: "receiver",
+    timeStamp: 1736991301484,
+    socketId: "socket_4",
   },
   {
     username: "carol",
     message: "Can you help me with something?",
-    origin: "sender",
+    messageOrigin: "sender",
+    timeStamp: 1736991301484,
+    socketId: "socket_1",
   },
   {
     username: "grace",
     message: "We should meet up sometime soon!",
-    origin: "receiver",
+    messageOrigin: "receiver",
+    timeStamp: 1736991301484,
+    socketId: "socket_5",
   },
   {
     username: "carol",
     message: "Let's catch up over the weekend.",
-    origin: "sender",
+    messageOrigin: "sender",
+    timeStamp: 1736991301484,
+    socketId: "socket_1",
   },
   {
     username: "emma",
     message: "I have an idea I want to run by you.",
-    origin: "receiver",
+    messageOrigin: "receiver",
+    timeStamp: 1736991301484,
+    socketId: "socket_6",
   },
-  { username: "frank", message: "Hey, how's it going?", origin: "receiver" },
-  { username: "carol", message: "Did you get my email?", origin: "sender" },
-];
+  {
+    username: "frank",
+    message: "Hey, how's it going?",
+    messageOrigin: "receiver",
+    timeStamp: 1736991301484,
+    socketId: "socket_7",
+  },
+  {
+    username: "carol",
+    message: "Did you get my email?",
+    messageOrigin: "sender",
+    timeStamp: 1736991301484,
+    socketId: "socket_1",
+  },
+] as unknown as MessageObject[];

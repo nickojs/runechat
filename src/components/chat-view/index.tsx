@@ -22,7 +22,7 @@ const ChatView = () => {
       <MessagesContainer>
         {allMessages?.map((msg) => (
           <Message
-            username={msg.sockedId}
+            username={msg.username}
             message={msg.message}
             origin={msg.messageOrigin as Origin}
           />
